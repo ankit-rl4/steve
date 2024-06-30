@@ -22,4 +22,4 @@ o	Scalability: Design the system to handle increasing volumes of data and reques
 
 Using SMS and phone marketing we can also target rural customer segment, making personalised marketing content for them as well as most of the customers that the bank has is in rural regions,  here we would also integrate government schemes to make our customers aware of it and benefit from it.
 
-##The Development is still in Progress
+## The Development is still in Progress
