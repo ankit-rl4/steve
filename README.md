@@ -1,4 +1,4 @@
-# Steve
+# Steve - Crafting Personalized Marketing Narratives with GenAI
 
 ![image](https://github.com/ankit-rl4/steve/assets/73584138/897a2498-56c5-4828-b557-594a09e00649)
 
