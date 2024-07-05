@@ -1,6 +1,6 @@
 # Steve - Crafting Personalized Marketing Narratives with GenAI
 
-![image](https://github.com/ankit-rl4/steve/assets/73584138/897a2498-56c5-4828-b557-594a09e00649)
+![image](https://github.com/ankit-rl4/steve/assets/73584138/897a2498-56c5-4828-b557-594a09e00649) 
 
 We aim to develop a comprehensive AI-driven marketing solution by fine-tuning GPT-4 from Microsoft Azure. This model will be trained on banking conversational data, financial reports, and marketing data to address a wide range of queries and generate effective marketing content. Once a centralized banking specific LLM model is created we will use multiple RAG along with it to generate SMS, Phone, email and website based marketing content.
 Solution Overview:
