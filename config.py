@@ -6,6 +6,5 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Azure configuration
-subscription_id = os.getenv('SUBSCRIPTION_ID')
-resource_group = os.getenv('RESOURCE_GROUP')
-workspace_name = os.getenv('WORKSPACE_NAME')
+ENDPOINT = os.getenv('API_ENDPOINT')
+KEYAPI = os.getenv('API_KEY')
