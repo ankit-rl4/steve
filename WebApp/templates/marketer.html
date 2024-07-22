@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chatbot-container {
+            width: 600px;
+            height: 80vh;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            background-color: #ff6600;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+        .chat-tabs {
+            display: flex;
+            justify-content: space-around;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+        }
+        .chat-tab {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .chat-tab.active {
+            background-color: #ff6600;
+            color: #ffffff;
+        }
+        .chat-box {
+            padding: 10px;
+            flex-grow: 1;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
+        }
+        .chat-input-container {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        .chat-input-container input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+        .chat-input-container button {
+            padding: 10px;
+            background-color: #ff6600;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+        .chat-message {
+            margin: 5px 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+        .user-message {
+            background-color: #e5e5ea;
+            align-self: flex-end;
+        }
+        .bot-message {
+            background-color: #d1e7dd;
+            align-self: flex-start;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chatbot-container">
+        <div class="chat-header">
+            <h2>Steve</h2>
+        </div>
+        <div class="chat-tabs">
+            <div class="chat-tab active" onclick="switchTab('sms')">SMS Marketing</div>
+            <div class="chat-tab" onclick="switchTab('phone')">Phone Marketing</div>
+            <div class="chat-tab" onclick="switchTab('email')">Email Marketing</div>
+        </div>
+        <div class="chat-box" id="chat-box">
+            <!-- Chat messages will appear here -->
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Type a message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+<a href="/distribution" class="btn-link">Go to Distribution</a>
+    <script>
+        function switchTab(tab) {
+            // Reset tab styles
+            document.querySelectorAll('.chat-tab').forEach(tabElement => {
+                tabElement.classList.remove('active');
+            });
+
+            // Set active tab
+            document.querySelector(`.chat-tab[onclick="switchTab('${tab}')"]`).classList.add('active');
+
+            // Clear chat box and display messages related to the selected tab
+            const chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML = ''; // Clear previous messages
+
+            // Add placeholder message to demonstrate tab switching
+            const placeholderMessage = document.createElement('div');
+            placeholderMessage.className = 'chat-message bot-message';
+            placeholderMessage.textContent = `Switched to ${tab} marketing. Please enter your query.`;
+            chatBox.appendChild(placeholderMessage);
+        }
+
+        function sendMessage() {
+    const chatInput = document.getElementById('chat-input');
+    const chatBox = document.getElementById('chat-box');
+    const userMessage = chatInput.value.trim();
+
+    if (userMessage) {
+        const userMessageElement = document.createElement('div');
+        userMessageElement.className = 'chat-message user-message';
+        userMessageElement.textContent = userMessage;
+        chatBox.appendChild(userMessageElement);
+        chatInput.value = '';
+
+        // Send request to /sms_market endpoint
+        fetch('/sms_market', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({'message': userMessage})
+        })
+        .then(response => response.text())
+        .then(data => {
+            const botMessageElement = document.createElement('div');
+            botMessageElement.className = 'chat-message bot-message';
+            botMessageElement.textContent = data;
+            chatBox.appendChild(botMessageElement);
+
+            // Scroll to the latest message
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+    }
+}
+
+        function getChatbotResponse(userMessage) {
+            // Placeholder for actual chatbot response logic
+            // For demo purposes, we will return a simple static response
+            return "That's an interesting question! How about highlighting the benefits of our new savings account?";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send SMS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 500px;
+            margin-top: 50px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        .btn-custom {
+            background-color: #f57c00;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #e65100;
+        }
+        .form-label {
+            color: #f57c00;
+            font-weight: bold;
+        }
+        h1 {
+            color: #f57c00;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Send SMS</h1>
+        <div class="form-group">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-control" id="message" rows="4" placeholder="Type your message here..."></textarea>
+        </div>
+        <button class="btn btn-custom btn-block" onclick="sendSMS()">Send</button>
+    </div>
+
+    <script>
+        function sendSMS() {
+            const message = document.getElementById('message').value.trim();
+
+            if (message) {
+                fetch('/send_sms', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({'message': message})
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data); // Log the response from the server
+                });
+            }
+        }
+    </script>
+</body>
+</html>
