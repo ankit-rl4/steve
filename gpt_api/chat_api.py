@@ -21,7 +21,7 @@ try:
     client = AzureOpenAI(
         azure_endpoint=endpoint,
         api_version="2024-05-01-preview",
-        api_key=keyapi
+        api_key='70f2bd45ba544fe19acbfd8f7a2e72a3'
     )
 except Exception as e:
     print(f"Error initializing AzureOpenAI client: {e}")
